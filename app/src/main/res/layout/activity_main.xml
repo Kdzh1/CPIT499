@@ -8,7 +8,7 @@
     >
 
     <EditText
-        android:id="@+id/name2"
+        android:id="@+id/userID"
         android:layout_width="293dp"
         android:layout_height="51dp"
         android:background="@drawable/border"
@@ -30,10 +30,15 @@
         android:hint="   Password"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="59dp"
-        tools:layout_editor_absoluteY="416dp" />
+        tools:layout_editor_absoluteY="416dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.931"
+        />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/loginBT"
         android:layout_width="249dp"
         android:layout_height="56dp"
         android:layout_marginTop="32dp"

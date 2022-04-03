@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context) {
@@ -150,9 +152,11 @@ public class DBHelper extends SQLiteOpenHelper {
             if (tableName.equalsIgnoreCase("driver")){
                 return getDriver(id);
             }else if (tableName.equalsIgnoreCase("security")){
-
+                return  getSecurity(id);
             }else if (tableName.equalsIgnoreCase("ticket")){
-
+                return getTicket(id);
+            }else if (tableName.equalsIgnoreCase("admin")){
+                return getAdmin(id);
             }
                 return null;
 
@@ -191,9 +195,45 @@ public class DBHelper extends SQLiteOpenHelper {
             }
         return null;
         }
+    private Admin getAdmin(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM Admin where id=? ", new String[] {id});
+        if (c.moveToFirst()){
 
-    private Ticket getTicket(){
+            Admin a = new Admin();
+            a.setId(c.getString(0));
+            a.setPassword(c.getString(1));
+            a.setName(c.getString(2));
+            a.setPhone(c.getString(3));
 
+            return a;
+
+        }
+        return null;
+    }
+
+    private ArrayList getTicket(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM Ticket where id=? ", new String[] {id});
+        Ticket t[] = new Ticket[c.getCount()];
+        ArrayList arr = new ArrayList();
+        if (c.moveToFirst()){
+            do {
+                Ticket ticket = new Ticket();
+                ticket.setId(Integer.parseInt(c.getString(0)));
+                ticket.setPlate(c.getString(1));
+                ticket.setPrice(c.getString(2));
+                ticket.setLocation(c.getString(3));
+                ticket.setTime(c.getString(4));
+                ticket.setStatus(Integer.parseInt(c.getString(5)));
+                ticket.setApproved(Integer.parseInt(c.getString(6)));
+                ticket.setDriverID(c.getString(7));
+                arr.add(ticket);
+            }while (c.moveToNext());
+           return arr;
+
+        }
+        return null;
     }
 
 
