@@ -1,12 +1,10 @@
-package com.example.kaue_parking;
+package com.example.kaueparking;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -18,13 +16,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase DB) {
-
+        DB.execSQL("CREATE TABLE admin (id TEXT UNIQUE, password TEXT,name TEXT,phone TEXT, PRIMARY KEY(id))");
+        DB.execSQL("CREATE TABLE driver (id TEXT UNIQUE, password TEXT, name TEXT, phone TEXT , PRIMARY KEY(id));");
+        DB.execSQL("CREATE TABLE security (id TEXT UNIQUE, password TEXT, name TEXT, phone TEXT, PRIMARY KEY(id));");
+        DB.execSQL("CREATE TABLE ticket (id INTEGER UNIQUE,plate TEXT,price TEXT,\n" +
+                "location TEXT, time TEXT, status INTEGER DEFAULT 0, approved INTEGER DEFAULT 0, driverID TEXT, PRIMARY KEY(id), FOREIGN KEY(driverID)REFERENCES driver (id));");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase DB, int i, int i1) {
 
     }
+
 
     public boolean insertData(String tableName, String data []){
 
@@ -172,7 +175,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 d.setPassword(c.getString(1));
                 d.setName(c.getString(2));
                 d.setPhone(c.getString(3));
-                d.setTicketID(c.getInt(4));
+
                 return d;
 
         }

@@ -1,4 +1,4 @@
-package com.example.kaue_parking;
+package com.example.kaueparking;
 
 public class Ticket {
     private int id;

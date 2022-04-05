@@ -1,6 +1,6 @@
-package com.example.kaue_parking;
+package com.example.kaueparking;
 
-public class Driver extends User{
+public class Driver extends User {
     private int ticketID;
     public Driver() {
     }

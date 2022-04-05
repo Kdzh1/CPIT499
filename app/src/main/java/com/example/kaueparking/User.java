@@ -1,4 +1,4 @@
-package com.example.kaue_parking;
+package com.example.kaueparking;
 
 public abstract class User {
     private String name;
@@ -36,5 +36,15 @@ public abstract class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }
